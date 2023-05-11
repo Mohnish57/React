@@ -8,9 +8,11 @@ steps:
     args: ['run', 'build']
 
   # Step 3: Deploy the app to App Engine
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'app'
-      - 'deploy'
-      - 'app.yaml'
-      # Add any additional flags or arguments as needed
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['app', 'deploy']
+
+  # Step to redirect traffic to the new version
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    args: ['app', 'services', 'set-traffic', '--splits', 'latest=1']
