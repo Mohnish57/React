@@ -1,6 +1,7 @@
 import './Backlog.css'
 import {Project} from '../../App.tsx';
 import { useState } from 'react';
+import UserSelector from '../UserSelector.tsx';
 
 interface Props {
   project: Project
@@ -27,18 +28,9 @@ const Backlog = ({project}: Props) => {
           <nav className="navbar navbar-light search-filter">
             <input className="form-control mr-sm-2" type="search"
               placeholder="Search backlog" onChange={e => console.log(e.target.value)} />
+              {/* TODO this search bar is going to filter issues based on input */}
           </nav>
-          <div className="d-flex flex-row align-items-center name-filter">
-            {project.members.map(user =>
-              <div className='user-selector'>
-                <div className={user.id === selectedUser? "user selected-user" : "user"}
-                  onClick={() => setSelectedUser(selectedUser ? "": user.id)}>
-                  <img src={user.icon} alt={user.name} />
-                </div>
-              </div>
-            )}
-      
-          </div>
+          <UserSelector users={project.members} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
         </div>
 
         </div>

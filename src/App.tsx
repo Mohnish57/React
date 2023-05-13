@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Backlog from "./components/page/Backlog";
 
-interface User {
+export interface User {
   id: string,
   name: string,
   email: string,
