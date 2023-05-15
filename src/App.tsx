@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Backlog from "./components/page/Backlog";
+import "./App.css";
 
 export interface User {
   id: string,
@@ -16,7 +17,20 @@ interface Sprint {
   name: string,
   goal: string,
   hasEnded: boolean,
-  issues: object[]
+  issues: Issue[]
+}
+
+export interface Issue{
+  id:string,
+  type:string,
+  title:string,
+  description:string,
+  comments:object[],
+  state: string,
+  icon: string,
+  assignee: string,
+  reporter: string,
+  storyPointEstimate: number
 }
 
 export interface Project {
@@ -51,9 +65,9 @@ function App() {
   const [project, setProject] = useState(mockProject);
   
   return (
-    <>
+    <div className="app">
       <Backlog project={project}/>
-    </>
+    </div>
   )
 }
 
