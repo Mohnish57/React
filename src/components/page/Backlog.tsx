@@ -5,6 +5,7 @@ import UserSelector from '../UserSelector.tsx';
 import IssueSearch from '../IssueSearch.tsx';
 import SprintCard from '../sprint.tsx';
 
+import IssuePane from '../IssuePane.tsx';
 
 interface Props {
   project: Project
@@ -14,6 +15,7 @@ interface Props {
 const Backlog = ({project}: Props) => {
 
   const [selectedUser, setSelectedUser] = useState("");
+  const [selectedIssue, setSelectedIssue] = useState("OC-1");
 
   return (
     <div className="backlog-page">
@@ -33,6 +35,10 @@ const Backlog = ({project}: Props) => {
           <UserSelector users={project.members} selectedUser={selectedUser} setSelectedUser={setSelectedUser}/>
         </div>
 
+      </div>
+      <div className="backlog-wrapper d-flex flex-row">
+        <div className={"sprint-list" + (!selectedIssue ? " col-12": " col-8")}>
+          {/* List of sprints and a backlog present here */}
         </div>
         <div className="backlog-wrapper d-flex flex-row">
           <div className={"sprint-list" + (!selectedUser ? " col-12": " col-8")}>
@@ -45,6 +51,7 @@ const Backlog = ({project}: Props) => {
           </div>
           
         </div>
+      </div>
     </div>
   
   )

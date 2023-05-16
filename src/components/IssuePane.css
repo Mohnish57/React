@@ -1,0 +1,152 @@
+.issue-pane {
+  padding: 0.5rem;
+}
+
+.title-wrapper {
+}
+
+.issue-id {
+  margin: 0.7rem 0 0 0.3rem;
+  color: #6b778c;
+}
+
+.issue-title {
+  margin-top: 1rem;
+}
+
+.issue-state {
+  margin-top: 0.7rem;
+}
+
+.issue-state a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.issue-state a:hover {
+  color: #222222;
+}
+
+/* Dropdown */
+
+.issue-state .dropdown {
+  display: inline-block;
+  position: relative;
+  color: #000000;
+  font-family: Sans-Serif;
+  background-color: #f6f6f6;
+}
+
+.issue-state .dd-button {
+  border-radius: 4px;
+  display: inline-block;
+  padding: 0.2rem 1.9rem 0.2rem 0.7rem;
+  background-color: #dfe1e6;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.issue-state .dd-button:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid black;
+}
+
+.issue-state .dd-button:hover {
+  background-color: #eeeeee;
+}
+
+.issue-state .dd-input {
+  display: none;
+}
+
+.issue-state .dd-menu {
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px 0 0 0;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  list-style-type: none;
+}
+
+.issue-state .dd-input + .dd-menu {
+  display: none;
+}
+
+.issue-state .dd-input:checked + .dd-menu {
+  display: block;
+}
+
+.issue-state .dd-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.issue-state .dd-menu li:hover {
+  background-color: #f6f6f6;
+}
+
+.issue-state .dd-menu li a {
+  display: block;
+  margin: -10px -20px;
+  padding: 10px 20px;
+}
+
+.issue-state .dd-menu li.divider {
+  padding: 0;
+  border-bottom: 1px solid #cccccc;
+}
+
+.issue-description-header {
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
+.issue-description-header p {
+  margin-bottom: 0.3rem;
+}
+
+.issue-details tbody tr:last-child * {
+  color: #5e6c84;
+}
+
+.issue-details-header {
+  margin-top: 0.8rem;
+  font-weight: 600;
+}
+
+.user-display img {
+  height: 2rem;
+}
+
+.user-display p {
+  padding-left: 1rem;
+  padding-top: 0.8rem;
+}
+
+.story-point {
+  margin-top: 0.3rem;
+  width: 1.2rem;
+  line-height: 1rem;
+  font-size: small;
+  background-color: #dfe1e6;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.issue-detail-header {
+  font-size: 0.8rem;
+  color: #42526e;
+  font-weight: 600;
+}
