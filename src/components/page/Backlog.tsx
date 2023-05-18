@@ -3,6 +3,8 @@ import { Project } from "../../App.tsx";
 import { useState } from "react";
 import UserSelector from "../UserSelector.tsx";
 import IssueSearch from "../IssueSearch.tsx";
+import SprintCard from "../sprint.tsx";
+import AddSprintCard from "../AddSprint.tsx";
 
 interface Props {
   project: Project;
@@ -10,7 +12,7 @@ interface Props {
 
 const Backlog = ({ project }: Props) => {
   const [selectedUser, setSelectedUser] = useState("");
-  const [selectedIssue, setSelectedIssue] = useState("OC-1");
+  const [selectedIssue, setSelectedIssue] = useState("");
 
   return (
     <div className="backlog-page">
@@ -41,8 +43,15 @@ const Backlog = ({ project }: Props) => {
         <div
           className={"sprint-list" + (!selectedIssue ? " col-12" : " col-8")}
         >
-          {/* List of sprints and a backlog present here */}
+          <SprintCard sprint={project.sprints[0]}/>
+          
+          <AddSprintCard sprint={project.sprints[0]}/>
         </div>
+        <div className="backlog-wrapper d-flex flex-row">
+          {/* <div className={"sprint-list" + (!selectedUser ? " col-12": " col-8")}> */}
+          
+            
+          </div>
 
         <div className={"backlog-issue-pane" + (selectedUser && " col-4")}>
           {/* This pane appears only if an issue is highlighted */}

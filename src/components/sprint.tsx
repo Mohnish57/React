@@ -1,143 +1,154 @@
+
 import React, { useState } from "react";
-import "./page/sprint.css";
+import "./sprint.css";
 import { Sprint, Issue } from "../App.tsx";
+import AddSprintCard from './AddSprint.tsx';
 
 interface Props {
   sprint: Sprint;
 }
 
-function getstatus(issues: Issue[]) {
-  let notstarted = 0;
-  let inprogress = 0;
+function getStoryPoints(issues: Issue[]) {
+  let notStarted = 0;
+  let inProgress = 0;
   let done = 0;
 
   for (let i = 0; i < issues.length; i++) {
-    if (issues[i].stage === "Not Started") {
-      notstarted += issues[i].storyPointEstimate;
-    } else if (issues[i].stage === "In Progress") {
-      inprogress += issues[i].storyPointEstimate;
-    } else if (issues[i].stage === "Done") {
+    if (issues[i].state === "Not Started") {
+      notStarted += issues[i].storyPointEstimate;
+    } else if (issues[i].state === "In Progress") {
+      inProgress += issues[i].storyPointEstimate;
+    } else if (issues[i].state === "Done") {
       done += issues[i].storyPointEstimate;
     }
   }
-  console.log([notstarted, inprogress, done]);
-  return [notstarted, inprogress, done];
+
+  return [notStarted, inProgress, done];
 }
 
-function SprintCard({ sprint }: Props) {
-  //issues
-  const [notstarted, inprogress, done] = getstatus(sprint.issues);
-  //console.log(sprint.issues);
+export default function SprintCard({ sprint }: Props) {
+
+   // drag Component
+   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, issueId:string) => {
+    console.log("Drag event started");
+    e.dataTransfer.setData("text/plain", issueId);
+  };
+
+  // const handleTextareaDragOver = (e: React.DragEvent<HTMLTextAreaElement>) => {
+  //   console.log("Drag over event triggered");
+  //   e.preventDefault();
+  // };
+
+  // const handleTextareaDrop = (e:React.DragEvent<HTMLTextAreaElement>) => {
+  //   console.log("Drop event triggered");
+  //   e.preventDefault();
+  //   const issueId = e.dataTransfer.getData("text/plain");
+  //   console.log("Dropped issueId:", issueId);
+  //   // Handle the dropped issueId here
+  // };
+
+  const openIssue = () => {
+    console.log("User clicked on issue");
+  };
+
+  const [notStarted, inProgress, done] = getStoryPoints(sprint.issues);
+
   return (
     <>
-
-      <div className="d-flex bg-light p-2  flex-column  main">
-            
-
-
-          <div className='d-flex'>
-            {/* left items */}
-        <div className="sprint-Name-date-issues d-flex  spx-2 ">
-          <h6 className="Sprint-Name px-2">{sprint.name}</h6>
-          <h6 className="Dates-text-secondary font-weight-light px-2">
-            {sprint.startDate}-{sprint.endDate}
-          </h6>
-          <br />
-          <h6 className="IssuesCount px-1 text-secondary font-weight-light">
-            ({sprint.issues.length} issue)
-          </h6>
-          <br />
-          <h6 className="IssuesCount px-1 text-secondary font-weight-light">
-            {sprint.goal}
-          </h6>
+      <div className="container bg-light px-3 py-2 rounded my-2 main">
+        <div className="row">
+          {/* left items */}
+          <div className="sprint-Name-date-issues align-items-center d-flex col  spx-2">
+            <h6 className="sprint-name px-2">{sprint.name}</h6>
+            <h6 className="Dates-text-secondary font-weight-light px-2">
+              {sprint.startDate}-{sprint.endDate}
+            </h6>
+            <h6 className="IssuesCount px-1 text-secondary font-weight-light">
+              ({sprint.issues.length} issue)
+            </h6>
+            <h6 className="IssuesCount px-1 text-secondary font-weight-light">
+              {sprint.goal}
+            </h6>
           </div>
-
-
-
           {/* right items */}
-          <div className="right-align d-flex justify-content-end align-items-center">
-                <button type="button" className="btn ml-auto btn-light border">
-                  Complete Sprint
-                </button>
-                      <div className="story-point-1 mx-1">
-                        <h6 className="text-light ">{notstarted}</h6>
-                      </div>
-                      <div className="story-point-2 mx-1">
-                        <h6 className="text-light  font-weight-bold">{inprogress}</h6>
-                      </div>
-                      <div className="story-point-3 mx-1">
-                        <h6 className="text-light font-weight-bold">{done}</h6>
-                      </div>
-                          <label className="dropdown">
-
-                                              <div className="dd-button">
-                                                Dropdown
-                                              </div>
-
-                                              <input type="checkbox" className="dd-input" id="test" />
-
-                                              <ul className="dd-menu">
-                                                <li>Edit </li>
-                                                <li>Delete</li>
-
-                                              </ul>
-                                              
-                                            </label>
+          <div className="col d-flex justify-content-end align-items-center">
+            <button type="button" className="btn ml-auto btn-light border">
+              Complete Sprint
+            </button>
+            <div className="story-point-1 mx-1">
+              <h6 className="text-light ">{notStarted}</h6>
+            </div>
+            <div className="story-point-2 mx-1">
+              <h6 className="text-light  font-weight-bold">{inProgress}</h6>
+            </div>
+            <div className="story-point-3 mx-1">
+              <h6 className="text-light font-weight-bold">{done}</h6>
+            </div>
+            <label className="dropdown">
+              <div className="dd-button">
+                Dropdown
               </div>
-              
-        
+              <input type="checkbox" className="dd-input" id="test" />
+              <ul className="dd-menu">
+                <li>Edit </li>
+                <li>Delete</li>
+              </ul>
+            </label>
+          </div>
         </div>
-          
-        
 
+        {/* sprint issues */}
+        {sprint.issues.map((issue) => (
+          <div
+            key={issue.id}
+            className="sprint-issues row d-flex align-items-center mt-1"
+            onClick={openIssue}
+            onDragStart={(e) => handleDragStart(e, issue.id)}
+            draggable
+          >
+            <div className="d-flex col align-items-center justify-content-start">
+              <img src={issue.icon} alt="Task" />
+              <h6 className="issue-type text-secondary h6 mx-2">
+                {issue.id}
+              </h6>
+              <h6 className="issue-type h5 mx-2 ">{issue.title}</h6>
+            </div>
+            <div className="d-flex justify-content-end col align-items-center">
+              <div className="story-point-1 mx-1">
+                <h6 className="text-light  font-weight-bold">{inProgress}</h6>
+              </div>
+              <label className="dropdown">
+                <div className="dd-button">
+                  To Do
+                </div>
+                <input type="checkbox" className="dd-input" id="test" />
+                <ul className="dd-menu">
+                  <li>In Progress</li>
+                  <li>Done</li>
+                </ul>
+              </label>
+              <img src="man.png" className="assignee-image" alt={issue.assignee} />
+              <label className="dropdown">
+                <div className="dd-button">
+                  -
+                </div>
+                <input type="checkbox" className="dd-input" id="test" />
+                <ul className="dd-menu">
+                  <li className="btn btn-light btn-block">In Progress</li>
+                  <li className="btn btn-light btn-block">Done</li>
+                </ul>
+              </label>
+            </div>
+          </div>
+        ))}
 
-
-
-                                      {/* issue */}
-                              <div className="sprint-issues d-flex align-items-center alert alert-primary">
-                                        <div className='d-flex justify-content-start'>
-                                        <img src={sprint.issues[0].icon} alt="Task" />
-                                        <h6 className="issue-type text-secondary h6 mx-2">
-                                          {sprint.issues[0].id}
-                                        </h6>
-                                        <h6 className="issue-type h5 mx-2 ">{sprint.issues[0].title}</h6>
-                                        </div>
-
-
-                                        <div className='d-flex justify-content-end align-items-center'>
-                                        <div className="story-point-1 mx-1">
-                                        <h6 className="text-light  font-weight-bold">{inprogress}</h6>
-                                          </div>
-                                                  <label className="dropdown">
-                                                      <div className="dd-button ">
-                                                        To Do
-                                                      </div>
-                                                      <input type="checkbox" className="dd-input" id="test" />
-                                                      <ul className="dd-menu">
-                                                        <li className='alert alert-primary'>In Progress </li>
-                                                        <li className='alert alert-success'>Done</li>
-                                                      </ul>
-                                                      </label>
-                                                      <img src="man.png" height='30rem' alt={sprint.issues[0].assignee} />
-                                                      
-                                                      <label className="dropdown">
-                                                      <div className="dd-button ">
-                                                        -
-                                                      </div>
-                                                      <input type="checkbox" className="dd-input" id="test" />
-                                                      <ul className="dd-menu">
-                                                        <li className='alert alert-primary'>In Progress </li>
-                                                        <li className='alert alert-success'>Done</li>
-                                                      </ul>
-                                                      </label>   
-
-                                        </div>
-                                </div>
-                                <div className='d-flex '>
-                                  <h6>+ Create Issue</h6>
-                                </div>
+        {/* Create Issue button */}
+        <div className="d-flex">
+          <button type="button" className="btn btn-light btn-block">+ Create Issue</button>
+        </div>
       </div>
     </>
   );
 }
-export default SprintCard;
+
+

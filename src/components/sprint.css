@@ -121,6 +121,18 @@ a:hover {
 
 .right-align {
   display: flex;
-  align-items: right !important;
+  align-items: right;
   justify-content: center;
+}
+.assignee-image {
+  height: 2rem;
+}
+
+/* .sprint-card {
+  width: 100%;
+  display: flexbox;
+} */
+.sprint-issues {
+  background-color: #85ccfbb3;
+  cursor: pointer;
 }
