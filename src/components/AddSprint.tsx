@@ -32,7 +32,7 @@ export default function AddSprintCard({ sprint }: Props) {
     e.preventDefault();
     console.log("Drop event triggered");
     const data = e.dataTransfer.getData("text");
-    // Do something with the dropped data
+    setbacklogComponent(data)
     console.log("Dropped data:", data);
   };
 
@@ -79,7 +79,7 @@ export default function AddSprintCard({ sprint }: Props) {
         onDragOver={(e) => e.preventDefault()}
         onDrop={handleDrop}>
             
-          <h6>Plan and prioritize future work here</h6>
+          <h6>{backlogComponent}</h6>
         </div>
         {/* droppable component end */}
         
