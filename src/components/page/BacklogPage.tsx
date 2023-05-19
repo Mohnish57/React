@@ -1,16 +1,16 @@
-import "./Backlog.css";
+import "./BacklogPage.css";
 import { Project } from "../../App.tsx";
 import { useState } from "react";
 import UserSelector from "../UserSelector.tsx";
 import IssueSearch from "../IssueSearch.tsx";
-import SprintCard from "../sprint.tsx";
+import SprintCard from "../SprintCard.tsx";
 import AddSprintCard from "../AddSprint.tsx";
 
 interface Props {
   project: Project;
 }
 
-const Backlog = ({ project }: Props) => {
+const BacklogPage = ({ project }: Props) => {
   const [selectedUser, setSelectedUser] = useState("");
   const [selectedIssue, setSelectedIssue] = useState("");
 
@@ -43,17 +43,12 @@ const Backlog = ({ project }: Props) => {
         <div
           className={"sprint-list" + (!selectedIssue ? " col-12" : " col-8")}
         >
-          <SprintCard sprint={project.sprints[0]}/>
-          
-          <AddSprintCard sprint={project.sprints[0]}/>
-        </div>
-        <div className="backlog-wrapper d-flex flex-row">
-          {/* <div className={"sprint-list" + (!selectedUser ? " col-12": " col-8")}> */}
-          
-            
-          </div>
+          <SprintCard sprint={project.sprints[0]} />
 
-        <div className={"backlog-issue-pane" + (selectedUser && " col-4")}>
+          <AddSprintCard sprint={project.sprints[0]} />
+        </div>
+
+        <div className={"backlog-issue-pane" + (selectedIssue && " col-4")}>
           {/* This pane appears only if an issue is highlighted */}
         </div>
       </div>
@@ -61,4 +56,4 @@ const Backlog = ({ project }: Props) => {
   );
 };
 
-export default Backlog;
+export default BacklogPage;
