@@ -1,0 +1,90 @@
+.board-page > * {
+  padding-left: 1.2rem;
+  padding-right: 1.2rem;
+}
+
+.board-page-head {
+  padding-top: 1.2rem;
+}
+
+.board-page-head .breadcrumb {
+  font-size: 0.9rem;
+}
+
+.board-page-head a {
+  color: #6b778c;
+}
+
+.board-page-head ol {
+  margin-bottom: 0.3rem;
+}
+
+.sprint-title h4 {
+  margin-bottom: 0;
+}
+
+.sprint-title p {
+  color: #6b778c;
+  line-height: 1.33333;
+  font-weight: normal;
+  font-size: 12px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-manage-wrapper {
+  width: 100%;
+}
+
+.gap {
+  margin-left: auto;
+}
+
+.sprint-manage {
+  font-style: inherit;
+  line-height: 1.33333;
+  color: #6b778c;
+  -webkit-box-align: center;
+  align-items: center;
+  font-weight: normal;
+  margin-top: 0px;
+  font-size: 12px;
+  margin-right: 8px;
+  margin-left: 4px;
+}
+
+.sprint-manage button:first-of-type {
+  margin-left: 1rem;
+}
+
+.edit-sprint {
+  -webkit-box-align: baseline;
+  align-items: baseline;
+  border-width: 0px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: inline-flex;
+  font-size: small;
+  font-style: normal;
+  font-family: inherit;
+  font-weight: 550;
+  max-width: 100%;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.1s ease-out 0s,
+    box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+  white-space: nowrap;
+  background: rgba(9, 30, 66, 0.04);
+  cursor: pointer;
+  height: 2.28571em;
+  line-height: 2.28571em;
+  padding: 0px;
+  vertical-align: middle;
+  width: auto;
+  -webkit-box-pack: center;
+  justify-content: center;
+  color: #42526e;
+  margin-left: 0.5rem;
+}
