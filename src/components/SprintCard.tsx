@@ -1,8 +1,7 @@
-
-import React, { useState } from "react";
-import "./sprint.css";
+import React from "react";
+import "./SprintCard.css";
 import { Sprint, Issue } from "../App.tsx";
-import AddSprintCard from './AddSprint.tsx';
+import CompleteSprintButton from "./button/CompleteSprintButton.tsx";
 
 interface Props {
   sprint: Sprint;
@@ -27,25 +26,14 @@ function getStoryPoints(issues: Issue[]) {
 }
 
 export default function SprintCard({ sprint }: Props) {
-
-   // drag Component
-   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, issueId:string) => {
+  // drag Component
+  const handleDragStart = (
+    e: React.DragEvent<HTMLDivElement>,
+    issueId: string
+  ) => {
     console.log("Drag event started");
     e.dataTransfer.setData("text/plain", issueId);
   };
-
-  // const handleTextareaDragOver = (e: React.DragEvent<HTMLTextAreaElement>) => {
-  //   console.log("Drag over event triggered");
-  //   e.preventDefault();
-  // };
-
-  // const handleTextareaDrop = (e:React.DragEvent<HTMLTextAreaElement>) => {
-  //   console.log("Drop event triggered");
-  //   e.preventDefault();
-  //   const issueId = e.dataTransfer.getData("text/plain");
-  //   console.log("Dropped issueId:", issueId);
-  //   // Handle the dropped issueId here
-  // };
 
   const openIssue = () => {
     console.log("User clicked on issue");
@@ -72,9 +60,7 @@ export default function SprintCard({ sprint }: Props) {
           </div>
           {/* right items */}
           <div className="col d-flex justify-content-end align-items-center">
-            <button type="button" className="btn ml-auto btn-light border">
-              Complete Sprint
-            </button>
+            <CompleteSprintButton />
             <div className="story-point-1 mx-1">
               <h6 className="text-light ">{notStarted}</h6>
             </div>
@@ -85,9 +71,7 @@ export default function SprintCard({ sprint }: Props) {
               <h6 className="text-light font-weight-bold">{done}</h6>
             </div>
             <label className="dropdown">
-              <div className="dd-button">
-                Dropdown
-              </div>
+              <div className="dd-button">Dropdown</div>
               <input type="checkbox" className="dd-input" id="test" />
               <ul className="dd-menu">
                 <li>Edit </li>
@@ -108,9 +92,7 @@ export default function SprintCard({ sprint }: Props) {
           >
             <div className="d-flex col align-items-center justify-content-start">
               <img src={issue.icon} alt="Task" />
-              <h6 className="issue-type text-secondary h6 mx-2">
-                {issue.id}
-              </h6>
+              <h6 className="issue-type text-secondary h6 mx-2">{issue.id}</h6>
               <h6 className="issue-type h5 mx-2 ">{issue.title}</h6>
             </div>
             <div className="d-flex justify-content-end col align-items-center">
@@ -118,20 +100,20 @@ export default function SprintCard({ sprint }: Props) {
                 <h6 className="text-light  font-weight-bold">{inProgress}</h6>
               </div>
               <label className="dropdown">
-                <div className="dd-button">
-                  To Do
-                </div>
+                <div className="dd-button">To Do</div>
                 <input type="checkbox" className="dd-input" id="test" />
                 <ul className="dd-menu">
                   <li>In Progress</li>
                   <li>Done</li>
                 </ul>
               </label>
-              <img src="man.png" className="assignee-image" alt={issue.assignee} />
+              <img
+                src="man.png"
+                className="assignee-image"
+                alt={issue.assignee}
+              />
               <label className="dropdown">
-                <div className="dd-button">
-                  -
-                </div>
+                <div className="dd-button">-</div>
                 <input type="checkbox" className="dd-input" id="test" />
                 <ul className="dd-menu">
                   <li className="btn btn-light btn-block">In Progress</li>
@@ -144,11 +126,11 @@ export default function SprintCard({ sprint }: Props) {
 
         {/* Create Issue button */}
         <div className="d-flex">
-          <button type="button" className="btn btn-light btn-block">+ Create Issue</button>
+          <button type="button" className="btn btn-light btn-block">
+            + Create Issue
+          </button>
         </div>
       </div>
     </>
   );
 }
-
-
