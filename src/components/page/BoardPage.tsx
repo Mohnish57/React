@@ -6,6 +6,7 @@ import UserSelector from "../UserSelector";
 import WaitIcon from "../../assets/WaitIcon.tsx";
 import CompleteSprintButton from "../button/CompleteSprintButton.tsx";
 import EditIcon from "../../assets/EditIcon.tsx";
+import IssueCard from "../IssueCard.tsx";
 
 interface Props {
   project: Project;
@@ -58,6 +59,28 @@ const BoardPage = ({ project }: Props) => {
             setSelectedUser={setSelectedUser}
           />
         </div>
+      </div>
+      <div className="board-page-wrapper d-flex flex-row">
+        {project.issueStages?.map((holder) => {
+          const issues = currentSprint.issues.filter(
+            (issue) => issue.state === holder.key
+          );
+
+          return (
+            <div className="issue-holder" key={holder.key}>
+              <div className="holder-header d-flex flex-row">
+                <p>
+                  {holder.name} {issues.length} ISSUE{issues.length != 1 && "S"}
+                </p>
+              </div>
+              <div className="issue-list">
+                {issues.map((issue) => (
+                  <IssueCard issue={issue} key={issue.id} />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
