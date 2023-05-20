@@ -88,3 +88,26 @@
   color: #42526e;
   margin-left: 0.5rem;
 }
+
+.issue-filters {
+  padding-top: 1.5rem;
+}
+
+.board-page-wrapper {
+  padding-top: 1.5rem;
+}
+
+.issue-holder {
+  min-height: 20rem;
+  width: 17rem;
+  background-color: #f4f5f7;
+  margin-right: 0.8rem;
+}
+
+.holder-header p {
+  padding-top: 0.8rem;
+  padding-left: 0.8rem;
+  color: #5e6c84;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
