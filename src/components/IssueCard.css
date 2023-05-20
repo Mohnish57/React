@@ -1,0 +1,82 @@
+.issue-card {
+  border-radius: 4px;
+  background-color: white;
+  margin: 0.15rem 0.3rem 0.2rem 0.3rem;
+  width: inherit;
+  box-shadow: var(
+    --ds-shadow-raised,
+    0 1px 1px rgba(23, 43, 77, 0.2),
+    0 0 1px rgba(23, 43, 77, 0.2)
+  );
+  cursor: pointer;
+  transition: background-color 140ms ease-in-out 0s, color 140ms ease-in-out 0s;
+}
+
+.issue-card:hover {
+  background-color: #deebff;
+}
+
+.issue-card > * {
+  width: 100%;
+}
+
+.issue-card-top {
+  width: 100%;
+}
+.issue-card-top button {
+  border: 0;
+  border-radius: 4px;
+  height: fit-content;
+  display: none;
+  margin-top: 0.6rem;
+  margin-right: 0.6rem;
+}
+
+.issue-card-top button:hover {
+  background-color: #c6c7c8;
+}
+
+.issue-card:hover button {
+  display: block;
+}
+
+.issue-card-top p {
+  margin-right: auto;
+  width: 75%;
+  font-size: 0.84rem;
+  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.42857142857143;
+}
+
+.issue-card-bottom {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.issue-card-bottom img:first-of-type {
+  height: fit-content;
+  margin-left: 0.5rem;
+  margin-top: 0.3rem;
+}
+
+.issue-card-bottom p {
+  margin-bottom: 0;
+  margin-left: 0.7rem;
+  font-size: 0.75rem;
+  color: #7a869a;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.issue-card-bottom a {
+  text-decoration: none;
+}
+
+.issue-card-bottom img:last-of-type {
+  height: 1.5rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+}
