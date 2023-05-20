@@ -34,11 +34,19 @@ export interface Issue {
   storyPointEstimate: number;
 }
 
+export interface IssueStage {
+  rank: number;
+  key: string;
+  name: string;
+  columnLimit: number | null;
+}
+
 export interface Project {
   id: string;
   name: string;
   members: User[];
   sprints: Sprint[];
+  issueStages: IssueStage[];
 }
 
 function App() {
@@ -75,7 +83,46 @@ function App() {
             type: "Task",
             title: "Upload Images to S3",
             description: "This is issue description",
-            state: "In Progress",
+            state: "INPROGRESS",
+            storyPointEstimate: 2,
+            reporter: "sawlanimohnish",
+            assignee: "sawlanimohnish",
+            comments: [],
+          },
+          {
+            id: "OC-2",
+            icon: "https://octagn.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+            type: "Task",
+            title:
+              "Upload Images to S3 Upload Images to S3 Upload Images to S3 Upload Images to S3",
+            description: "This is issue description",
+            state: "INPROGRESS",
+            storyPointEstimate: 2,
+            reporter: "sawlanimohnish",
+            assignee: "sawlanimohnish",
+            comments: [],
+          },
+          {
+            id: "OC-3",
+            icon: "https://octagn.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+            type: "Task",
+            title:
+              "Upload Images to S3 Upload Images to S3 Upload Images to S3 Upload Images to S3",
+            description: "This is issue description",
+            state: "INPROGRESS",
+            storyPointEstimate: 2,
+            reporter: "sawlanimohnish",
+            assignee: "sawlanimohnish",
+            comments: [],
+          },
+          {
+            id: "OC-4",
+            icon: "https://octagn.atlassian.net/rest/api/2/universal_avatar/view/type/issuetype/avatar/10318?size=medium",
+            type: "Task",
+            title:
+              "Upload Images to S3 Upload Images to S3 Upload Images to S3 Upload Images to S3",
+            description: "This is issue description",
+            state: "TODO",
             storyPointEstimate: 2,
             reporter: "sawlanimohnish",
             assignee: "sawlanimohnish",
@@ -84,13 +131,33 @@ function App() {
         ],
       },
     ],
+    issueStages: [
+      {
+        rank: 1,
+        key: "TODO",
+        name: "TO DO",
+        columnLimit: null,
+      },
+      {
+        rank: 2,
+        key: "INPROGRESS",
+        name: "IN PROGRESS",
+        columnLimit: null,
+      },
+      {
+        rank: 3,
+        key: "DONE",
+        name: "DONE",
+        columnLimit: null,
+      },
+    ],
   };
 
   const [project, setProject] = useState(mockProject);
 
   return (
     <div className="app">
-      <BacklogPage project={project} />
+      <BoardPage project={project} />
     </div>
   );
 }
