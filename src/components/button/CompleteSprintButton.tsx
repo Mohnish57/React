@@ -4,9 +4,9 @@ function CompleteSprintButton() {
   return (
     <button
       type="button"
-      className="btn ml-auto btn-light border complete-sprint"
+      className="btn ml-auto btn-light complete-sprint"
     >
-      Complete sprint
+      <h6 className='complete-sprint-text'>Complete sprint</h6>
     </button>
   );
 }

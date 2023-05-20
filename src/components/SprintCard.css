@@ -1,34 +1,45 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 .story-point-1 {
-  height: 1.2rem;
-  width: 1.5rem;
+  height: 1rem;
+  width: 1.2rem;
   background-color: #cfcfcf;
-  border-radius: 40%;
+  border-radius: 45%;
   text-align: center;
   font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
 }
 .story-point-2 {
-  height: 1.2rem;
-  width: 1.5rem;
-  background-color: #2e04e5;
-  border-radius: 40%;
+  height: 1rem;
+  width: 1.2rem;
+  position: relative;
+  background-color: #0052cc;
+  border-radius: 45%;
   text-align: center;
-  font-weight: bold;
+  font-weight: bolder;
+  font-size: 12px;
+  color: #ffffff;
 }
 
 .story-point-3 {
-  height: 1.2rem;
-  width: 1.5rem;
-  background-color: #04e52d;
-  border-radius: 40%;
+  height: 1rem;
+  width: 1.2rem;
+  background-color: rgb(0, 135, 90);
+  border-radius: 45%;
   text-align: center;
   font-weight: bold;
+  font-size: 12px;
+  color: #ffffff;
 }
 
 body {
   color: #000000;
   font-family: Sans-Serif;
   padding: 30px;
-  background-color: #f6f6f6;
+  background-color: rgb(255, 255, 255);
 }
 
 a {
@@ -46,29 +57,37 @@ a:hover {
   display: inline-block;
   position: relative;
 }
+.sprint-edit-button {
+  height: 2rem;
+}
+.sprint-issue-id {
+  font-size: 10px;
+  color: #000000;
+}
 
 .dd-button {
   display: inline-block;
-  border: 1px solid gray;
   border-radius: 4px;
-  padding: 10px 30px 10px 20px;
-  background-color: #ffffff;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+  background-color: rgb(223, 225, 230);
   cursor: pointer;
   white-space: nowrap;
+  font-size: 0.7rem;
+  font-weight: bold;
 }
 
-.dd-button:after {
+/* .dd-button:after {
   content: "";
   position: absolute;
   top: 50%;
-  right: 15px;
+  right: 4px;
   transform: translateY(-50%);
   width: 0;
   height: 0;
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-top: 5px solid black;
-}
+} */
 
 .dd-button:hover {
   background-color: #eeeeee;
@@ -88,6 +107,7 @@ a:hover {
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.1);
   background-color: #ffffff;
   list-style-type: none;
+  z-index: 3;
 }
 
 .dd-input + .dd-menu {
@@ -127,12 +147,85 @@ a:hover {
 .assignee-image {
   height: 2rem;
 }
+.issue-type {
+  font-size: 15px;
+  color: rgb(68, 85, 112);
+}
+.struck-text {
+  text-decoration: line-through;
+}
+.sprint-issues-highlighted-issue {
+  background-color: rgb(222, 235, 255);
+}
 
 /* .sprint-card {
   width: 100%;
   display: flexbox;
 } */
+.sprint-main {
+  background-color: rgb(244, 245, 247);
+}
 .sprint-issues {
-  background-color: #85ccfbb3;
+  background-color: #ffffff;
   cursor: pointer;
+}
+.sprint-issues:hover {
+  background-color: hsla(0, 0%, 100%, 0.619);
+}
+
+.dropdown-prop {
+  z-index: 5;
+  background-color: rgb(226, 228, 233);
+  border: none;
+}
+.complete-sprint {
+  background-color: rgb(226, 228, 233);
+}
+.complete-sprint-text {
+  color: rgb(72, 88, 115);
+  font-weight: 500;
+}
+.sprint-issues:hover .issue-op {
+  display: block;
+}
+.issue-op {
+  display: none;
+}
+.dd-button-wrapper {
+  width: 2rem;
+}
+.create-issue-button {
+  width: 100%;
+}
+.create-issue-text {
+  color: rgb(72, 88, 115);
+  font-weight: 500;
+}
+.issue-state {
+  font-size: small;
+}
+.dropdown .default {
+  background-color: rgb(222, 235, 255);
+  color: rgb(7, 71, 166);
+}
+.dropdown .default:hover {
+  color: white;
+  background-color: rgb(7, 71, 166);
+}
+.dropdown .done {
+  background-color: rgb(227, 252, 239);
+  color: rgb(18, 114, 81);
+}
+.dropdown .done:hover {
+  color: rgb(255, 255, 255);
+
+  background-color: rgb(18, 114, 81);
+}
+.dropdown .todo {
+  background-color: rgb(223, 225, 230);
+  color: rgb(66, 82, 110);
+}
+.dropdown .todo:hover {
+  background-color: rgb(181, 182, 184);
+  color: rgb(66, 82, 110);
 }
