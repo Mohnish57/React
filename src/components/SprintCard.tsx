@@ -1,4 +1,3 @@
-
 import "./SprintCard.css";
 import React, { useState } from "react";
 import { Sprint, Issue, IssueStage } from "../App.tsx";
@@ -21,41 +20,31 @@ function getStoryPoints(issues: Issue[]) {
       inProgress += issues[i].storyPointEstimate;
     } else if (issues[i].state === "DONE") {
       done += issues[i].storyPointEstimate;
-      
     }
   }
 
-
   return [notStarted, inProgress, done];
-
-  
 }
-function getIssueStateName(key:string,issueStages:IssueStage[]){
-  const stage=issueStages.filter(issueStage=>issueStage.key === key).at(0);
-  if (!stage){
-    return 'TO DO'
+function getIssueStateName(key: string, issueStages: IssueStage[]) {
+  const stage = issueStages
+    .filter((issueStage) => issueStage.key === key)
+    .at(0);
+  if (!stage) {
+    return "TO DO";
   }
   return stage.name;
-
 }
-function getIssueStateClass(key:string)
-{
- if (key === 'TODO')
- {
-  return ' todo'
- }
- if (key === 'DONE')
- {
-  return ' done'
- }
- return ' default'
+function getIssueStateClass(key: string) {
+  if (key === "TODO") {
+    return " todo";
+  }
+  if (key === "DONE") {
+    return " done";
+  }
+  return " default";
 }
 
-
-
-
-
-export default function SprintCard({ sprint ,issueStages}: Props) {
+export default function SprintCard({ sprint, issueStages }: Props) {
   // drag Component
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,
@@ -64,15 +53,11 @@ export default function SprintCard({ sprint ,issueStages}: Props) {
     console.log("Drag event started");
     e.dataTransfer.setData("text/plain", issueId);
   };
-  const [selectedIssue,setSelectedIssue]=useState('')
+  const [selectedIssue, setSelectedIssue] = useState("");
 
-
-
-  const openIssue = (issueId:string) => {
+  const openIssue = (issueId: string) => {
     console.log("User clicked on issue");
-    setSelectedIssue(issueId)
-
-    
+    setSelectedIssue(issueId);
   };
 
   const [notStarted, inProgress, done] = getStoryPoints(sprint.issues);
@@ -90,7 +75,7 @@ export default function SprintCard({ sprint ,issueStages}: Props) {
             <h6 className="IssuesCount px-1 text-secondary font-weight-light">
               ({sprint.issues.length} issue)
             </h6>
-            
+
             <h6 className="IssuesCount px-1 text-secondary font-weight-light">
               {sprint.goal}
             </h6>
@@ -98,17 +83,24 @@ export default function SprintCard({ sprint ,issueStages}: Props) {
           {/* right items */}
           <div className="col d-flex justify-content-end align-items-center">
             <CompleteSprintButton />
-            <div className="story-point-1 mx-1">
-              {notStarted}
-            </div>
-            <div className="story-point-2 mx-1">
-              {inProgress}
-            </div>
-            <div className="story-point-3 mx-1">
-              {done}
-            </div>
+            <div className="story-point-1 mx-1">{notStarted}</div>
+            <div className="story-point-2 mx-1">{inProgress}</div>
+            <div className="story-point-3 mx-1">{done}</div>
             <label className="dropdown mx-1">
-              <div className="dd-button sprint-edit-button align-items-center pt-1"><svg width="24" height="24" viewBox="0 0 24 24" role="presentation"><g     fill="currentColor" fill-rule="evenodd"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></g></svg></div>
+              <div className="dd-button sprint-edit-button align-items-center pt-1">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  role="presentation"
+                >
+                  <g fill="currentColor" fillRule="evenodd">
+                    <circle cx="5" cy="12" r="2"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <circle cx="19" cy="12" r="2"></circle>
+                  </g>
+                </svg>
+              </div>
               <input type="checkbox" className="dd-input" id="test" />
               <ul className="dd-menu">
                 <li>Edit </li>
@@ -122,27 +114,38 @@ export default function SprintCard({ sprint ,issueStages}: Props) {
         {sprint.issues.map((issue) => (
           <div
             key={issue.id}
-            className={" row d-flex py-1 align-items-center mt-1 mx-1 rounded  sprint-issues"+(issue.id === selectedIssue? '-highlighted-issue' : '')}
-
-            onClick={()=>{
-              return openIssue(issue.id)}}
+            className={
+              " row d-flex py-1 align-items-center mt-1 mx-1 rounded  sprint-issues" +
+              (issue.id === selectedIssue ? "-highlighted-issue" : "")
+            }
+            onClick={() => {
+              return openIssue(issue.id);
+            }}
             onDragStart={(e) => handleDragStart(e, issue.id)}
-            draggable='true'
+            draggable="true"
           >
             <div className="d-flex col-6 align-items-center justify-content-start">
               <img src={issue.icon} alt="Task" />
-              <div className={"issue-type text-nowrap text-secondary  mx-1 "+(issue.state==='DONE'&& 'struck-text')}>{issue.id}</div>
-              <div className="issue-type text-truncate  mx-2  ">{issue.title}</div>
+              <div
+                className={
+                  "issue-type text-nowrap text-secondary  mx-1 " +
+                  (issue.state === "DONE" && "struck-text")
+                }
+              >
+                {issue.id}
+              </div>
+              <div className="issue-type text-truncate  mx-2  ">
+                {issue.title}
+              </div>
             </div>
-
 
             <div className="d-flex justify-content-end col align-items-center">
               <div className="story-point-1 mx-1 ">
                 {issue.storyPointEstimate}
               </div>
               <label className="dropdown mx-1 ">
-                <div className={"dd-button"+(getIssueStateClass(issue.state))}>
-                  {getIssueStateName(issue.state,issueStages)}
+                <div className={"dd-button" + getIssueStateClass(issue.state)}>
+                  {getIssueStateName(issue.state, issueStages)}
                 </div>
                 <input type="checkbox" className="dd-input" id="test" />
                 <ul className="dd-menu">
@@ -150,20 +153,34 @@ export default function SprintCard({ sprint ,issueStages}: Props) {
                   <li>Done</li>
                 </ul>
               </label>
-              <img src="man.png" className="assignee-image mx-1" alt={issue.assignee} />
-              <div className='dd-button-wrapper'>
-              <label className="dropdown issue-op">
-                
+              <img
+                src="man.png"
+                className="assignee-image mx-1"
+                alt={issue.assignee}
+              />
+              <div className="dd-button-wrapper">
+                <label className="dropdown issue-op">
                   <div className="dd-button">
-                  <svg width="24" height="24" viewBox="0 0 24 24" role="presentation"><g fill="currentColor" fill-rule="evenodd"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></g></svg>
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      role="presentation"
+                    >
+                      <g fill="currentColor" fill-rule="evenodd">
+                        <circle cx="5" cy="12" r="2"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                        <circle cx="19" cy="12" r="2"></circle>
+                      </g>
+                    </svg>
                   </div>
-                
-                <input type="checkbox" className="dd-input mx-1" id="test" />
-                <ul className="dd-menu">
-                  <li className="btn btn-light btn-block">In Progress</li>
-                  <li className="btn btn-light btn-block">Done</li>
-                </ul>
-              </label>
+
+                  <input type="checkbox" className="dd-input mx-1" id="test" />
+                  <ul className="dd-menu">
+                    <li className="btn btn-light btn-block">In Progress</li>
+                    <li className="btn btn-light btn-block">Done</li>
+                  </ul>
+                </label>
               </div>
             </div>
           </div>
@@ -171,8 +188,11 @@ export default function SprintCard({ sprint ,issueStages}: Props) {
 
         {/* Create Issue button */}
         <div className="d-flex my-1">
-          <button type="button" className="create-issue-button btn btn-light btn-block">
-            <h6 className='create-issue-text'>+ Create Issue </h6>
+          <button
+            type="button"
+            className="create-issue-button btn btn-light btn-block"
+          >
+            <h6 className="create-issue-text">+ Create Issue </h6>
           </button>
         </div>
       </div>
