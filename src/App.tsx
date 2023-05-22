@@ -19,6 +19,7 @@ export interface Sprint {
   goal: string;
   hasEnded: boolean;
   issues: Issue[];
+
 }
 
 export interface Issue {
@@ -32,6 +33,7 @@ export interface Issue {
   assignee: string;
   reporter: string;
   storyPointEstimate: number;
+  
 }
 
 export interface IssueStage {
@@ -109,7 +111,7 @@ function App() {
             title:
               "Upload Images to S3 Upload Images to S3 Upload Images to S3 Upload Images to S3",
             description: "This is issue description",
-            state: "INPROGRESS",
+            state: "DONE",
             storyPointEstimate: 2,
             reporter: "sawlanimohnish",
             assignee: "sawlanimohnish",
@@ -157,7 +159,7 @@ function App() {
 
   return (
     <div className="app">
-      <BoardPage project={project} />
+      <BacklogPage project={project} />
     </div>
   );
 }

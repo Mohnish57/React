@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./AddSprint.css";
 import { Sprint, Issue } from "../App.tsx";
+import CompleteSprintButton from "./button/CompleteSprintButton.tsx";
 
 interface Props {
   sprint: Sprint;
@@ -39,7 +40,7 @@ export default function AddSprintCard({ sprint }: Props) {
   return (
     <>
       <div
-        className="container px-3 py-2 my-2 main"
+        className="container-fluid  px-3 py-2 my-2 main"
       >
         <div className="row">
           {/* left items */}
@@ -51,20 +52,18 @@ export default function AddSprintCard({ sprint }: Props) {
           </div>
           {/* right items */}
           <div className="col d-flex justify-content-end align-items-center">
-            <button type="button" className="btn ml-auto btn-light border">
-              Complete Sprint
-            </button>
+          <CompleteSprintButton />
             <div className="story-point-1 mx-1">
-              <h6 className="text-light ">{notStarted}</h6>
+              {notStarted}
             </div>
             <div className="story-point-2 mx-1">
-              <h6 className="text-light font-weight-bold">{inProgress}</h6>
+              {inProgress}
             </div>
             <div className="story-point-3 mx-1">
-              <h6 className="text-light font-weight-bold">{done}</h6>
+              {done}
             </div>
             <label className="dropdown">
-              <div className="dd-button">Dropdown</div>
+            <div className="dd-button sprint-edit-button align-items-center pt-1"><svg width="24" height="24" viewBox="0 0 24 24" role="presentation"><g     fill="currentColor" fill-rule="evenodd"><circle cx="5" cy="12" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="19" cy="12" r="2"></circle></g></svg></div>
               <input type="checkbox" className="dd-input" id="test" />
               <ul className="dd-menu">
                 <li>Edit</li>

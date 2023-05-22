@@ -43,7 +43,7 @@ const BacklogPage = ({ project }: Props) => {
         <div
           className={"sprint-list" + (!selectedIssue ? " col-12" : " col-8")}
         >
-          <SprintCard sprint={project.sprints[0]} />
+          <SprintCard issueStages={project.issueStages} sprint={project.sprints[0]} />
 
           <AddSprintCard sprint={project.sprints[0]} />
         </div>
