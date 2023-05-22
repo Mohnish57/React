@@ -1,6 +1,6 @@
 import "./BoardPage.css";
-import { Project, Sprint } from "../../App.tsx";
-import { useState } from "react";
+import { Issue, Project, Sprint } from "../../App.tsx";
+import { DragEvent, useState } from "react";
 import IssueSearch from "../IssueSearch";
 import UserSelector from "../UserSelector";
 import WaitIcon from "../../assets/WaitIcon.tsx";
@@ -17,6 +17,46 @@ const BoardPage = ({ project }: Props) => {
   const [currentSprint, setCurrentSprint] = useState<Sprint>(
     project.sprints[0] // TODO change this
   );
+  const [isIssueBeingDragged, setIsIssueBeingDragged] = useState(false);
+
+  function handleOnDrag(e: DragEvent<HTMLDivElement>, issue: Issue) {
+    e.dataTransfer.setData("Issue", issue.id);
+  }
+
+  function handleDragOver(e: DragEvent<HTMLDivElement>) {
+    e.preventDefault();
+  }
+
+  function handleOnDrop(e: DragEvent<HTMLDivElement>) {
+    const issueId = e.dataTransfer.getData("Issue");
+
+    const cloneSprint = Object.assign({}, currentSprint);
+    const newIssues = [...cloneSprint.issues];
+    const issue: Issue | undefined = newIssues.find((i) => i.id === issueId);
+
+    if (!issue) {
+      setCurrentSprint(cloneSprint);
+      setIsIssueBeingDragged(false);
+      return;
+    }
+
+    issue.state = (e.target as HTMLDivElement).id;
+    cloneSprint.issues = newIssues;
+    setCurrentSprint(cloneSprint);
+    setIsIssueBeingDragged(false);
+  }
+
+  function handleOnDragEnd(
+    setIsIssueBeingDragged: React.Dispatch<React.SetStateAction<boolean>>
+  ) {
+    setIsIssueBeingDragged(false);
+  }
+
+  function handleDragLeave(
+    setIsIssueBeingDragged: React.Dispatch<React.SetStateAction<boolean>>
+  ) {
+    setIsIssueBeingDragged(true);
+  }
 
   return (
     <div className="board-page">
@@ -67,7 +107,22 @@ const BoardPage = ({ project }: Props) => {
           );
 
           return (
-            <div className="issue-holder" key={holder.key}>
+            <div
+              className="issue-holder"
+              key={holder.key}
+              onDragLeave={() => {
+                handleDragLeave(setIsIssueBeingDragged);
+              }}
+            >
+              <div
+                className={
+                  "issue-dropper" +
+                  (isIssueBeingDragged ? " active-dropper" : "")
+                }
+                id={holder.key}
+                onDrop={handleOnDrop}
+                onDragOver={handleDragOver}
+              ></div>
               <div className="holder-header d-flex flex-row">
                 <p>
                   {holder.name} {issues.length} ISSUE{issues.length != 1 && "S"}
@@ -75,7 +130,15 @@ const BoardPage = ({ project }: Props) => {
               </div>
               <div className="issue-list">
                 {issues.map((issue) => (
-                  <IssueCard issue={issue} key={issue.id} />
+                  <IssueCard
+                    issue={issue}
+                    key={issue.id}
+                    draggable
+                    handleOnDragStart={(e) => handleOnDrag(e, issue)}
+                    handleOnDragEnd={() => {
+                      handleOnDragEnd(setIsIssueBeingDragged);
+                    }}
+                  />
                 ))}
               </div>
             </div>

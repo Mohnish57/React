@@ -4,11 +4,24 @@ import "./IssueCard.css";
 
 interface Props {
   issue: Issue;
+  draggable: boolean;
+  handleOnDragStart: React.DragEventHandler<HTMLDivElement>;
+  handleOnDragEnd: React.DragEventHandler<HTMLDivElement>;
 }
 
-const IssueCard = ({ issue }: Props) => {
+const IssueCard = ({
+  issue,
+  draggable,
+  handleOnDragStart,
+  handleOnDragEnd,
+}: Props) => {
   return (
-    <div className="issue-card d-flex flex-column">
+    <div
+      className="issue-card d-flex flex-column"
+      draggable={draggable}
+      onDragStart={handleOnDragStart}
+      onDragEnd={handleOnDragEnd}
+    >
       <div className="issue-card-top d-flex">
         <p>{issue.title}</p>
         <button>
